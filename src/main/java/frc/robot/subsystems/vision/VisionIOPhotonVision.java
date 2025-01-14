@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import org.ejml.simple.SimpleMatrix;
 import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
@@ -13,8 +14,11 @@ import org.photonvision.targeting.PhotonPipelineResult;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
 import frc.robot.Constants;
 
 public class VisionIOPhotonVision implements VisionIO {
@@ -58,7 +62,8 @@ public class VisionIOPhotonVision implements VisionIO {
 
                         double timestamp = pose.timestampSeconds;
                         Pose2d pose2d = pose.estimatedPose.toPose2d();
-                        PoseObservation poseObservation = new PoseObservation(timestamp, pose2d, 0);
+                        double[] stdDevs = {0};
+                        PoseObservation poseObservation = new PoseObservation(timestamp, pose2d, new Matrix<N3, N1>(new SimpleMatrix(stdDevs)));
                         poseObservations.add(poseObservation);
                     }
                 }

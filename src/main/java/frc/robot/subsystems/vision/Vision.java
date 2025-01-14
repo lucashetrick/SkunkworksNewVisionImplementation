@@ -41,7 +41,7 @@ public class Vision extends SubsystemBase {
     for(int i = 0; i < io.length; i++) {
       for(PoseObservation observation : inputs[i].poseObservations) {
         double[] stdDevs = {0};
-        consumer.acceptVisionMeasurement(observation.estimatedPose(), observation.timestamp(), new Matrix<N3, N1>(new SimpleMatrix(stdDevs)));
+        consumer.acceptVisionMeasurement(observation.estimatedPose(), observation.timestamp(), observation.stdDevs());
       }
     }
   }
