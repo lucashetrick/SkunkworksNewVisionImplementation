@@ -17,22 +17,11 @@ import frc.robot.subsystems.vision.VisionIOPhotonVision;
 public class Drivetrain extends SubsystemBase {
 
   private static Drivetrain instance;
-
-  public Drivetrain() {
-  }
-
-  public static Drivetrain getInstance() {
-
-    if (instance == null) {
-      instance = new Drivetrain();
-    }
-
-    return instance;
-  }
-
   SwerveDrivePoseEstimator poseEstimator = new SwerveDrivePoseEstimator(null, null, null, null);
   Vision vision = new Vision(getInstance()::addVisionMeasurement, new VisionIOPhotonVision("Photon Camera", new Transform3d()));
 
+  public Drivetrain() {}
+  
   public void addVisionMeasurement(
       Pose2d visionRobotPoseMeters,
       double timestampSeconds,
@@ -44,5 +33,14 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
+  }
+
+  public static Drivetrain getInstance() {
+
+    if (instance == null) {
+      instance = new Drivetrain();
+    }
+
+    return instance;
   }
 }

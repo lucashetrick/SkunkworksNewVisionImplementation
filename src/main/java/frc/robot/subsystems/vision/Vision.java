@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems.vision;
 
-import org.ejml.simple.SimpleMatrix;
-
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.numbers.N1;
@@ -41,14 +39,14 @@ public class Vision extends SubsystemBase {
     for(int i = 0; i < io.length; i++) {
       for(PoseObservation observation : inputs[i].poseObservations) {
         double[] stdDevs = {0};
-        consumer.acceptVisionMeasurement(observation.estimatedPose(), observation.timestamp(), observation.stdDevs());
+        consumer.accept(observation.estimatedPose(), observation.timestamp(), observation.stdDevs());
       }
     }
   }
 
   @FunctionalInterface
   public static interface VisionConsumer {
-    public void acceptVisionMeasurement(
+    public void accept(
         Pose2d visionRobotPoseMeters,
         double timestampSeconds,
         Matrix<N3, N1> visionMeasurementStdDevs);
