@@ -11,9 +11,9 @@ import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.vision.Vision;
-import frc.robot.vision.VisionIOPhotonVision;
-import frc.robot.vision.Vision.VisionConsumer;
+import frc.robot.subsystems.vision.Vision;
+import frc.robot.subsystems.vision.VisionIOPhotonVision;
+import frc.robot.subsystems.vision.Vision.VisionConsumer;
 
 public class Drivetrain extends SubsystemBase implements VisionConsumer {
 
