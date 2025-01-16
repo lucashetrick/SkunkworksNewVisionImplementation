@@ -13,9 +13,9 @@ public interface VisionIO {
         Matrix<N3, N1> stdDevs) {
     }
 
-    public static class VisionIOInputs {
+    public class VisionMeasurement {
         public PoseObservation[] poseObservations = new PoseObservation[0];
     }
 
-    public default void updateInputs(VisionIOInputs inputs) {}
+    public VisionMeasurement getLatestData();
 }

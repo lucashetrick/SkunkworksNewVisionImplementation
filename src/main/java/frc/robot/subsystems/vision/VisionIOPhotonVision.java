@@ -42,9 +42,10 @@ public class VisionIOPhotonVision implements VisionIO {
     }
 
     @Override
-    public void updateInputs(VisionIOInputs inputs) {
+    public VisionMeasurement getLatestData() {
         List<PoseObservation> poseObservations = new LinkedList<PoseObservation>();
         List<PhotonPipelineResult> results = camera.getAllUnreadResults();
+        VisionMeasurement latest = new VisionMeasurement();
 
         if (!results.isEmpty()) {
             PhotonPipelineResult result = results.get(results.size() - 1);
@@ -70,10 +71,12 @@ public class VisionIOPhotonVision implements VisionIO {
             }
         }
 
-        inputs.poseObservations = new PoseObservation[poseObservations.size()];
+        latest.poseObservations = new PoseObservation[poseObservations.size()];
 
         for (int i = 0; i < poseObservations.size(); i++) {
-            inputs.poseObservations[i] = poseObservations.get(i);
+            latest.poseObservations[i] = poseObservations.get(i);
         }
+
+        return latest;
     }
 }

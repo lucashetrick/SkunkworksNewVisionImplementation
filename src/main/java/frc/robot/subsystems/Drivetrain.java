@@ -18,17 +18,17 @@ public class Drivetrain extends SubsystemBase {
 
   private static Drivetrain instance;
   SwerveDrivePoseEstimator poseEstimator = new SwerveDrivePoseEstimator(null, null, null, null);
-  Vision vision = new Vision(getInstance()::addVisionMeasurement, new VisionIOPhotonVision("Photon Camera", new Transform3d()));
+  Vision vision = new Vision(this::addVisionMeasurement, new VisionIOPhotonVision("Photon Camera", new Transform3d()));
 
   public Drivetrain() {}
   
   public void addVisionMeasurement(
-      Pose2d visionRobotPoseMeters,
-      double timestampSeconds,
-      Matrix<N3, N1> visionMeasurementStdDevs) {
+      Pose2d estimatedPose,
+      double timestamp,
+      Matrix<N3, N1> stdDevs) {
 
     poseEstimator.addVisionMeasurement(
-        visionRobotPoseMeters, timestampSeconds, visionMeasurementStdDevs);
+        estimatedPose, timestamp, stdDevs);
   }
 
   @Override
